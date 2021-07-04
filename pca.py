@@ -8,6 +8,9 @@ class PCA:
         self.eigenvalues = []
         self.eigenvectors = []
 
+    def normalize_data(self):
+        self.X = (self.X - np.mean(self.X, axis=0, keepdims=True)) / np.std(self.X, ddof=1)
+
     def analyze(self):
         sigma = np.cov(self.X, rowvar=False)
         eigenvalues, eigenvectors = np.linalg.eig(sigma)
@@ -21,10 +24,9 @@ class PCA:
         return Y
 
     def analyze_by_svd(self):
-        X_ = self.X - np.mean(self.X, axis=0, keepdims=True)
-        U, sigma, VT = np.linalg.svd(X_)
+        U, sigma, VT = np.linalg.svd(self.X)
         self.eigenvalues = sigma
         self.eigenvectors = VT.T
-        Y = np.dot(self.X, VT.T[:, :self.components])
+        Y = np.dot(self.X, VT[:, :self.components])
         return Y
 
