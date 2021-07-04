@@ -3,10 +3,6 @@ import numpy as np
 
 class PCA:
     def __init__(self, X, components=3):
-        """
-        X: 数据矩阵，每一行是一个样本
-        components: 要降到的维数，应小于X的列数
-        """
         self.X = X
         self.components = components
         self.eigenvalues = []
@@ -23,3 +19,12 @@ class PCA:
         self.eigenvectors = np.array([x[1] for i, x in enumerate(result_set)]).T
         Y = np.dot(self.X, self.eigenvectors[:, :self.components])
         return Y
+
+    def analyze_by_svd(self):
+        XH_T = self.X - np.mean(self.X, axis=0, keepdims=True)
+        U, sigma, VT = np.linalg.svd(XH_T)
+        self.eigenvalues = sigma
+        self.eigenvectors = VT.T
+        Y = np.dot(self.X, VT.T[:, :self.components])
+        return Y
+

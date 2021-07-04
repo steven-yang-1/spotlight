@@ -21,7 +21,7 @@ def bp_network():
         samples_X,
         samples_Y,
         hidden_node_count=6,
-        learn_rate=0.2,
+        learn_rate=0.5,
         converge_precision=0.01
     )
     bp.model()
@@ -52,6 +52,18 @@ def pca_algorithm():
     print(pca_object.eigenvectors)
 
 
+def pca_by_svd():
+    pca_object = pca.PCA([
+        [1.0, 1.0, 1.0],
+        [2.0, 2.0, 2.0],
+        [3.0, 3.0, 3.0],
+        [4.0, 4.0, 4.0]
+    ], components=1)
+    print(pca_object.analyze_by_svd())
+    print(pca_object.eigenvalues)
+    print(pca_object.eigenvectors)
+
+
 if __name__ == '__main__':
-    bp_network()
+    pca_by_svd()
 
