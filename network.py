@@ -18,6 +18,9 @@ class BPNeuralNetwork:
     def sigmoid(net):
         return 1.0 / (1.0 + np.exp(-net))
 
+    def zero_centered(self):
+        self.X = self.X - np.mean(self.X, axis=0, keepdims=True)
+
     def model(self):
         n = 0
         eps = self.converge_precision + 1
