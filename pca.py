@@ -8,8 +8,8 @@ class PCA:
         self.eigenvalues = []
         self.eigenvectors = []
 
-    def normalize_data(self):
-        self.X = (self.X - np.mean(self.X, axis=0, keepdims=True)) / np.std(self.X, ddof=1)
+    def zero_centered(self):
+        self.X = self.X - np.mean(self.X, axis=0, keepdims=True)
 
     def analyze(self):
         sigma = np.cov(self.X, rowvar=False)
