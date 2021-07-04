@@ -21,8 +21,8 @@ class PCA:
         return Y
 
     def analyze_by_svd(self):
-        XH_T = self.X - np.mean(self.X, axis=0, keepdims=True)
-        U, sigma, VT = np.linalg.svd(XH_T)
+        X_ = self.X - np.mean(self.X, axis=0, keepdims=True)
+        U, sigma, VT = np.linalg.svd(X_)
         self.eigenvalues = sigma
         self.eigenvectors = VT.T
         Y = np.dot(self.X, VT.T[:, :self.components])
