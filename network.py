@@ -1,9 +1,10 @@
 import math
 import numpy as np
 import numpy.matlib
+import mixins
 
 
-class BPNeuralNetwork:
+class BPNeuralNetwork(mixins.DataPreprocessMixin):
     def __init__(self, X, Y, hidden_node_count=5, learn_rate=0.1, converge_precision=0.8, max_loop=10000):
         self.X = X
         self.Y = Y
@@ -13,13 +14,11 @@ class BPNeuralNetwork:
         self.max_loop = max_loop
         self.W = np.matlib.rand(self.hidden_node_count, Y.shape[1])
         self.V = np.matlib.rand(X.shape[1], self.hidden_node_count)
+        self.activate_func = lambda net: BPNeuralNetwork.sigmoid(net)
 
     @staticmethod
     def sigmoid(net):
         return 1.0 / (1.0 + np.exp(-net))
-
-    def zero_centered(self):
-        self.X = self.X - np.mean(self.X, axis=0, keepdims=True)
 
     def model(self):
         n = 0
@@ -32,11 +31,11 @@ class BPNeuralNetwork:
                 XV = [x] * self.V
                 OutputHidden = []
                 for i in range(XV.shape[1]):
-                    OutputHidden.append(BPNeuralNetwork.sigmoid(XV[0, i]))
+                    OutputHidden.append(self.activate_func(XV[0, i]))
                 O1W = [OutputHidden] * self.W
                 OutputVector = []
                 for i in range(O1W.shape[0]):
-                    OutputVector.append(BPNeuralNetwork.sigmoid(O1W[0, i]))
+                    OutputVector.append(self.activate_func(O1W[0, i]))
                 Delta_O = []
                 for i in range(len(y)):
                     delta_o = OutputVector[i]*(1 - OutputVector[i])*(y[i] - OutputVector[i])
@@ -64,10 +63,10 @@ class BPNeuralNetwork:
             XV = [x] * self.V
             OutputHidden = []
             for i in range(XV.shape[1]):
-                OutputHidden.append(BPNeuralNetwork.sigmoid(XV[0, i]))
+                OutputHidden.append(self.activate_func(XV[0, i]))
             O1W = [OutputHidden] * self.W
             OutputVector = []
             for i in range(O1W.shape[0]):
-                OutputVector.append(BPNeuralNetwork.sigmoid(O1W[0, i]))
+                OutputVector.append(self.activate_func(O1W[0, i]))
             Y.append(OutputVector)
         return Y

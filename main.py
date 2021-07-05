@@ -65,5 +65,5 @@ def pca_by_svd():
 
 
 if __name__ == '__main__':
-    pca_by_svd()
-
+    #pca_by_svd()
+    bp_network()

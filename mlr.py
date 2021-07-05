@@ -1,7 +1,8 @@
 import numpy as np
+import mixins
 
 
-class MLR:
+class MLR(mixins.DataPreprocessMixin):
     beta = []
 
     def __init__(self, X, y):

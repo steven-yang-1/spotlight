@@ -1,15 +1,13 @@
 import numpy as np
+import mixins
 
 
-class PCA:
+class PCA(mixins.DataPreprocessMixin):
     def __init__(self, X, components=3):
         self.X = X
         self.components = components
         self.eigenvalues = []
         self.eigenvectors = []
-
-    def zero_centered(self):
-        self.X = self.X - np.mean(self.X, axis=0, keepdims=True)
 
     def analyze(self):
         sigma = np.cov(self.X, rowvar=False)
