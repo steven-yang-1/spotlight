@@ -4,7 +4,7 @@ import numpy.matlib
 import mixins
 
 
-class BPNeuralNetwork(mixins.DataPreprocessMixin):
+class BPNeuralNetwork(mixins.DataSet):
     def __init__(self, X, Y, hidden_node_count=5, learn_rate=0.1, converge_precision=0.8, max_loop=10000):
         self.X = X
         self.Y = Y

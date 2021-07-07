@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class DataPreprocessMixin:
+class DataSet:
     X = []
 
     def zero_centered(self):

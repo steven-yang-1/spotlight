@@ -2,7 +2,7 @@ import numpy as np
 import mixins
 
 
-class PCA(mixins.DataPreprocessMixin):
+class PCA(mixins.DataSet):
     def __init__(self, X, components=3):
         self.X = X
         self.components = components

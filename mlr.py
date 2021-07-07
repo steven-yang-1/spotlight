@@ -2,7 +2,7 @@ import numpy as np
 import mixins
 
 
-class MLR(mixins.DataPreprocessMixin):
+class MLR(mixins.DataSet):
     beta = []
 
     def __init__(self, X, y):

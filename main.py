@@ -1,6 +1,7 @@
 import network
 import numpy as np
 import data_io
+import outlier
 import pca
 
 
@@ -64,6 +65,18 @@ def pca_by_svd():
     print(pca_object.eigenvectors)
 
 
+def m_dist():
+    data = np.array([
+        [1.0, 2.0, 1.0],
+        [2.1, 1.0, 2.5],
+        [3.5, 1.0, 3.2],
+        [2.0, 2.0, 4.3]
+    ])
+    m_distance = outlier.MahalanobisDistance(data)
+    print(m_distance.compute([1, 2, 3]))
+
+
 if __name__ == '__main__':
     #pca_by_svd()
-    bp_network()
+    #bp_network()
+    m_dist()
