@@ -67,14 +67,14 @@ def pca_by_svd():
 
 def m_dist():
     data = np.array([
-        [1.0, 2.0, 1.0],
-        [2.1, 1.0, 2.5],
-        [3.5, 1.0, 3.2],
-        [2.0, 2.0, 4.3]
+        [3.0, 4.0],
+        [5.0, 6.0],
+        [2.0, 2.0],
+        [8.0, 4.0]
     ])
     m_distance = outlier.MahalanobisDistance(data)
-    print(m_distance.compute([1, 2, 3]))
-
+    #print(m_distance.compute([1, 2, 3]))
+    print(m_distance(np.array([[3, 4]]), np.array([[5, 6]])))
 
 if __name__ == '__main__':
     #pca_by_svd()
