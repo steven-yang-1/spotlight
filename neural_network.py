@@ -10,7 +10,7 @@ def sigmoid(net):
 
 
 def d_sigmoid(x):
-    return x * (1 - x)
+    return x * (1.0 - x)
 
 
 class BPNeuralNetwork:
